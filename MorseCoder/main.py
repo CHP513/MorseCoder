@@ -1,4 +1,11 @@
 from tkinter import *
+from playsound import playsound
+
+# Sounds for Morse code
+DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
+DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
+BLANK_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/blank.wav"
+
 
 #Dictionary of Morse Code
 MORSE_CODE = {
@@ -41,9 +48,8 @@ MORSE_CODE = {
     " ": " "
 }
 
-
+# Converts string in input txt to morse code and outputs into morse label
 def convert_to_morse():
-    print("button")
     # Get String from input box
     string_to_morse = inputtxt.get()
 
@@ -63,6 +69,19 @@ def convert_to_morse():
 
     # Convert blank label to morse
     label_morse.config(text=morse)
+
+#Plays sound of morse code in morse label
+def play_morse():
+    # get text from label
+    morse = label_morse.cget("text")
+    for note in morse:
+        if note == ".":
+            playsound(DOT_SOUND, True)
+        if note == "-":
+            playsound(DASH_SOUND, True)
+        if note == " ":
+            playsound(BLANK_SOUND, False)
+
 
 # Build tkinter window
 window= Tk()
@@ -84,10 +103,14 @@ label_morse.grid(row=2, column=1)
 
 # Create button to convert text
 
-button = Button(text="Convert", command=convert_to_morse)
-button.grid(row=1, column=2, sticky="w")
+convert_button = Button(text="Convert", command=convert_to_morse)
+convert_button.grid(row=1, column=2)
 
-
+# Create button to play sound
+# sound_image = PhotoImage(file="sound.jpg")
+play_button = Button(text="Play", command=play_morse)
+play_button.grid(row=3, column=1)
+# Keep window open
 window.mainloop()
 
 # # Prompt User for String to convert
