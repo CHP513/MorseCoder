@@ -3,8 +3,9 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
-DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
-DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
+# Need full file path in order to work correctly
+DOT_SOUND = "FILE_PATH/dot.wav"
+DASH_SOUND = "FILE_PATH/dash.wav"
 
 #Dictionary of Morse Code
 MORSE_CODE = {
@@ -94,12 +95,10 @@ window.config(padx=10, pady=20, background="black")
 # Create intro label
 label_intro = Label(text="Type what you want converted into morse code:", font=("Arial", 10), bg="black", fg="green")
 label_intro.place(x=100, y=50)
-# label_intro.grid(row=0, column=0)
 
 # Create input text
 inputtxt = Entry(width=20, bg="green", fg="black")
 inputtxt.place(x=160, y=80)
-# inputtxt.grid(row=1, column=0)
 
 # Create label for morse code. Relative is to center.
 label_morse = Label(text="", font=("Arial", 20), bg="black", fg="green")
@@ -108,11 +107,9 @@ label_morse.place(relx=.5, rely=.5, anchor="center")
 # Create button to convert text
 convert_button = Button(text="Convert", command=convert_to_morse, bg="green", fg="black")
 convert_button.place(x=300, y=80)
-# convert_button.grid(row=2, column=0)
 
 # Keep window open
 window.mainloop()
-
 
 # # Command line code:
 # # Prompt User for String to convert
