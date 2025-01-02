@@ -3,10 +3,8 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
-
-# Need full file path in order to work correctly
-DOT_SOUND = "FILE_PATH/dot.wav"
-DASH_SOUND = "FILE_PATH/dash.wav"
+DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
+DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
 
 #Dictionary of Morse Code
 MORSE_CODE = {
@@ -65,14 +63,14 @@ def convert_to_morse():
     for char in list_string:
         list_morse.append(MORSE_CODE[char])
 
-    # Convert list to String (Seperate each list item by space)
+    # Convert list to String (Separate each list item by space)
     morse = " ".join(list_morse)
 
     # Convert blank label to morse
     label_morse.config(text=morse)
 
-    # Play morse in sound
-    play_morse()
+    # Play morse in sound, window after is needed to display text and make sound simultaneously
+    window.after(100,play_morse)
 
 #Plays sound of morse code in morse label
 def play_morse():
@@ -88,27 +86,29 @@ def play_morse():
 
 
 # Build tkinter window
-window= Tk()
+window = Tk()
 window.title("Morse Coder")
 window.minsize(width=500, height=300)
-window.config(padx=10, pady=20)
+window.config(padx=10, pady=20, background="black")
 
 # Create intro label
-label_intro = Label(text="Type what you want converted into morse code:", font=("Arial", 10))
-label_intro.grid(row=0, column=1)
+label_intro = Label(text="Type what you want converted into morse code:", font=("Arial", 10), bg="black", fg="green")
+label_intro.place(x=100, y=50)
+# label_intro.grid(row=0, column=0)
 
 # Create input text
-inputtxt = Entry(width=20)
-inputtxt.grid(row=1, column=1)
+inputtxt = Entry(width=20, bg="green", fg="black")
+inputtxt.place(x=160, y=80)
+# inputtxt.grid(row=1, column=0)
 
-# Create label for morse code
-label_morse = Label(text="", font=("Arial", 20))
-label_morse.grid(row=3, column=1)
+# Create label for morse code. Relative is to center.
+label_morse = Label(text="", font=("Arial", 20), bg="black", fg="green")
+label_morse.place(relx=.5, rely=.5, anchor="center")
 
 # Create button to convert text
-
-convert_button = Button(text="Convert", command=convert_to_morse)
-convert_button.grid(row=2, column=1)
+convert_button = Button(text="Convert", command=convert_to_morse, bg="green", fg="black")
+convert_button.place(x=300, y=80)
+# convert_button.grid(row=2, column=0)
 
 # Keep window open
 window.mainloop()
