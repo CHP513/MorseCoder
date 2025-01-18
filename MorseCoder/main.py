@@ -3,8 +3,9 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
-DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
-DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
+# Need full file path in order to work correctly
+DOT_SOUND = "FILE_PATH/dot.wav"
+DASH_SOUND = "FILE_PATH/dash.wav"
 
 #Dictionary of Morse Code
 MORSE_CODE = {
