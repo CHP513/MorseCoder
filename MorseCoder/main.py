@@ -3,9 +3,8 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
-# Need full file path in order to work correctly
-DOT_SOUND = "FILE_PATH/dot.wav"
-DASH_SOUND = "FILE_PATH/dash.wav"
+DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
+DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
 
 #Dictionary of Morse Code
 MORSE_CODE = {
@@ -62,6 +61,9 @@ def convert_to_morse():
     # Convert each char to Morse Code
     list_morse = []
     for char in list_string:
+        # If char entered is not in dictionary, turn to blank
+        if (char not in MORSE_CODE):
+            char = " "
         list_morse.append(MORSE_CODE[char])
 
     # Convert list to String (Separate each list item by space)
@@ -110,6 +112,7 @@ convert_button.place(x=300, y=80)
 
 # Keep window open
 window.mainloop()
+
 
 # # Command line code:
 # # Prompt User for String to convert
