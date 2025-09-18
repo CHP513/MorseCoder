@@ -1,13 +1,22 @@
+# Charles (Chip) Brady
+# September 2025
+# This project is able to read an input on a string and not only outputs the string
+# into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
+# into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
+# into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
+
 from tkinter import *
 from playsound import playsound
 import time
 
 # Sounds for Morse code
-# Need full file path in order to work correctly
-DOT_SOUND = "FILE_PATH/dot.wav"
-DASH_SOUND = "FILE_PATH/dash.wav"
+# DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
+# DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
+DOT_SOUND = "path/to/dot.wav"
+DASH_SOUND = "path/to/dash.wav"
 
-#Dictionary of Morse Code
+
+# Dictionary of Morse Code
 MORSE_CODE = {
     "A":".-",
     "B":"-...",
@@ -76,7 +85,7 @@ def convert_to_morse():
     # Play morse in sound, window after is needed to display text and make sound simultaneously
     window.after(100,play_morse)
 
-#Plays sound of morse code in morse label
+# Plays sound of morse code in morse label
 def play_morse():
     # get text from label
     morse = label_morse.cget("text")
