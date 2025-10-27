@@ -8,6 +8,7 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
+## Need to change in correspondance to location of files
 DOT_SOUND = "FILE_PATH/dot.wav"
 DASH_SOUND = "FILE_PATH/dash.wav"
 
@@ -125,5 +126,6 @@ window.mainloop()
 
 # # Print Morse Code
 # print(f"{string_to_morse} in morse code is {morse}")
+
 
 
