@@ -2,8 +2,6 @@
 # September 2025
 # This project is able to read an input on a string and not only outputs the string
 # into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
-# into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
-# into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
 
 from tkinter import *
 from playsound import playsound
@@ -127,4 +125,5 @@ window.mainloop()
 
 # # Print Morse Code
 # print(f"{string_to_morse} in morse code is {morse}")
+
 
