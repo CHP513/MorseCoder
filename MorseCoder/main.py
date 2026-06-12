@@ -1,5 +1,5 @@
 # Charles (Chip) Brady
-# September 2025
+# June 2026
 # This project is able to read an input on a string and not only outputs the string
 # into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
 
@@ -8,50 +8,48 @@ from playsound import playsound
 import time
 
 # Sounds for Morse code
-## Need to change in correspondance to location of files
-DOT_SOUND = "FILE_PATH/dot.wav"
-DASH_SOUND = "FILE_PATH/dash.wav"
+DOT_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dot.wav"
+DASH_SOUND = "C:/Users/chpb5/PycharmProjects/MorseCoder/dash.wav"
 
-# Dictionary of Morse Code
-MORSE_CODE = {
-    "A":".-",
-    "B":"-...",
-    "C":"-.-.",
-    "D":"-..",
-    "E":".",
-    "F":"..-.",
-    "G":"--.",
-    "H":"....",
-    "I":"..",
-    "J":".---",
-    "K":"-.-",
-    "L":".-..",
-    "M":"--",
-    "N":"-.",
-    "O":"---",
-    "P":".--.",
-    "Q":"--.-",
-    "R":".-.",
-    "S":"...",
-    "T":"-",
-    "U":"..-",
-    "V":"...-",
-    "W":".--",
-    "X":"-..-",
-    "Y":"-.--",
-    "Z":"--..",
-    "1":".----",
-    "2":"..---",
-    "3":"...--",
-    "4":"....-",
-    "5":".....",
-    "6":"-....",
-    "7":"--...",
-    "8":"---..",
-    "9":"----.",
-    "10":"-----",
-    " ": " "
-}
+MORSE_CODE = (
+    ("A", ".-"),
+    ("B", "-..."),
+    ("C", "-.-."),
+    ("D", "-.."),
+    ("E", "."),
+    ("F", "..-."),
+    ("G", "--."),
+    ("H", "...."),
+    ("I", ".."),
+    ("J", ".---"),
+    ("K", "-.-"),
+    ("L", ".-.."),
+    ("M", "--"),
+    ("N", "-."),
+    ("O", "---"),
+    ("P", ".--."),
+    ("Q", "--.-"),
+    ("R", ".-."),
+    ("S", "..."),
+    ("T", "-"),
+    ("U", "..-"),
+    ("V", "...-"),
+    ("W", ".--"),
+    ("X", "-..-"),
+    ("Y", "-.--"),
+    ("Z", "--.."),
+    ("1", ".----"),
+    ("2", "..---"),
+    ("3", "...--"),
+    ("4", "....-"),
+    ("5", "....."),
+    ("6", "-...."),
+    ("7", "--..."),
+    ("8", "---.."),
+    ("9", "----."),
+    ("0", "-----"),
+    (" ", " ")
+)
 
 # Converts string in input txt to morse code and outputs into morse label
 def convert_to_morse():
@@ -66,11 +64,18 @@ def convert_to_morse():
 
     # Convert each char to Morse Code
     list_morse = []
+
     for char in list_string:
-        # If char entered is not in dictionary, turn to blank
-        if (char not in MORSE_CODE):
-            char = " "
-        list_morse.append(MORSE_CODE[char])
+        found = False
+
+        for letter, code in MORSE_CODE:
+            if char == letter:
+                list_morse.append(code)
+                found = True
+                break
+        # If character is not found in MORSE_CODE, replace with blank
+        if not found:
+            list_morse.append(" ")
 
     # Convert list to String (Separate each list item by space)
     morse = " ".join(list_morse)
@@ -126,6 +131,5 @@ window.mainloop()
 
 # # Print Morse Code
 # print(f"{string_to_morse} in morse code is {morse}")
-
 
 
