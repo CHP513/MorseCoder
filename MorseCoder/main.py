@@ -1,16 +1,38 @@
 # Charles (Chip) Brady
-# September 2025
+# June 2026
 # This project is able to read an input on a string and not only outputs the string
 # into Morse code, but also immediately reads the dot's and dashes to produce the corresponding sound.
 
-from tkinter import *
-from playsound import playsound
-import time
+import tkinter as tk
+import os
+from tkinter import END
 
-# Sounds for Morse code
-## Need to change in correspondance to location of files
-DOT_SOUND = "FILE_PATH/dot.wav"
-DASH_SOUND = "FILE_PATH/dash.wav"
+import pygame
+
+pygame.mixer.init()
+
+# Setup for Sound Paths
+BASE_DIR = os.path.dirname(__file__)
+DOT_SOUND = os.path.join(BASE_DIR, "dot.wav")
+DASH_SOUND = os.path.join(BASE_DIR, "dash.wav")
+
+DOT = pygame.mixer.Sound(DOT_SOUND)
+DASH = pygame.mixer.Sound(DASH_SOUND)
+
+DOT_LENGTH = 100
+DASH_LENGTH = 300
+LETTER_SPACE = 200
+WORD_SPACE = 700
+
+# Error check for dot.wav and dash.wav sound file
+if not os.path.exists(DOT_SOUND):
+    raise FileNotFoundError(f"Missing file: {DOT_SOUND}")
+
+if not os.path.exists(DOT_SOUND):
+    raise FileNotFoundError(f"Missing file: {DASH_SOUND}")
+
+# Prevent Multiple Playbacks with is_playing check
+is_playing = False
 
 # Dictionary of Morse Code
 MORSE_CODE = {
@@ -49,76 +71,111 @@ MORSE_CODE = {
     "7":"--...",
     "8":"---..",
     "9":"----.",
-    "10":"-----",
+    "0":"-----",
+    "!":"-.-.--",
+    "?":"..--..",
+    ".":".-.-.-",
+    ",":"--..--",
+    ":":"---...",
     " ": " "
 }
 
-# Converts string in input txt to morse code and outputs into morse label
+# Converts string in inputtxt to morse code and outputs into morse label
 def convert_to_morse():
-    # Get String from input box
-    string_to_morse = inputtxt.get()
+    # Get String from input box and upper case string
+    text = inputtxt.get().upper()
 
-    # Make each letter in String Capital so it can be read by dictionary
-    upper_string_to_morse = string_to_morse.upper()
+    # Output list for morse code
+    morse_output = []
 
-    # Read each char in String and put into a list
-    list_string = list(upper_string_to_morse)
+    for char in text:
+        if char == " ":
+            morse_output.append("/") # word seperator
+        else:
+            morse_output.append(MORSE_CODE.get(char, ""))
 
-    # Convert each char to Morse Code
-    list_morse = []
-    for char in list_string:
-        # If char entered is not in dictionary, turn to blank
-        if (char not in MORSE_CODE):
-            char = " "
-        list_morse.append(MORSE_CODE[char])
+    morse = " ".join(morse_output).strip()
 
-    # Convert list to String (Separate each list item by space)
-    morse = " ".join(list_morse)
-
-    # Convert blank label to morse
     label_morse.config(text=morse)
 
-    # Play morse in sound, window after is needed to display text and make sound simultaneously
-    window.after(100,play_morse)
+    if morse:
+        window.after(100, play_morse)
 
 # Plays sound of morse code in morse label
 def play_morse():
+
+    # Do not play if sound is already playing
+    global is_playing
+
+    if is_playing:
+        return
+
+    is_playing = True
+
     # get text from label
     morse = label_morse.cget("text")
-    for note in morse:
-        if note == ".":
-            playsound(DOT_SOUND, True)
-        if note == "-":
-            playsound(DASH_SOUND, True)
-        if note == " ":
-            time.sleep(1)
 
+    try:
+        # Play sound depending on symbol
+        for symbol in morse:
+            if symbol == ".":
+                DOT.play()
+                pygame.time.wait(DOT_LENGTH)
+
+            elif symbol == "-":
+                DASH.play()
+                pygame.time.wait(DASH_LENGTH)
+
+            elif symbol == "/":
+                # pause between words
+                pygame.time.wait(WORD_SPACE)
+
+            else:
+                # space between letters
+                pygame.time.wait(LETTER_SPACE)
+
+    finally:
+        is_playing = False
+
+def clear_text():
+    inputtxt.delete(0, END)
+    label_morse.config(text="")
 
 # Build tkinter window
-window = Tk()
+window = tk.Tk()
 window.title("Morse Coder")
 window.minsize(width=500, height=300)
 window.config(padx=10, pady=20, background="black")
 
-# Create intro label
-label_intro = Label(text="Type what you want converted into morse code:", font=("Arial", 10), bg="black", fg="green")
-label_intro.place(x=100, y=50)
+# Create and place intro label
+label_intro = tk.Label(text="Type what you want converted into morse code:", font=("Arial", 10), bg="black", fg="green")
+# label_intro.place(x=100, y=50)
+label_intro.grid(row=0, column=0, columnspan=2, pady=10)
 
-# Create input text
-inputtxt = Entry(width=20, bg="green", fg="black")
-inputtxt.place(x=160, y=80)
+# Create and place input text
+inputtxt = tk.Entry(width=20, bg="green", fg="black")
+# inputtxt.place(x=160, y=80)
+inputtxt.grid(row=1, column=0)
 
-# Create label for morse code. Relative is to center.
-label_morse = Label(text="", font=("Arial", 20), bg="black", fg="green")
-label_morse.place(relx=.5, rely=.5, anchor="center")
+# Create and place label for morse code.
+label_morse = tk.Label(text="", font=("Arial", 20), bg="black", fg="green")
+# label_morse.place(relx=.5, rely=.5, anchor="center")
+label_morse.grid(row=2, column=0, columnspan=2, pady=20)
 
-# Create button to convert text
-convert_button = Button(text="Convert", command=convert_to_morse, bg="green", fg="black")
-convert_button.place(x=300, y=80)
+# Create and place button to convert text
+convert_button = tk.Button(text="Convert", command=convert_to_morse, bg="green", fg="black")
+# convert_button.place(x=300, y=80)
+convert_button.grid(row=1, column=1)
+
+# Create and place button to clear text in input textbox
+clear_button = tk.Button(text="Clear", command=clear_text, bg="green", fg="black")
+clear_button.grid(row=1, column=2)
+
+# Press Enter to Convert Text
+inputtxt.bind("<Return>", lambda event: convert_to_morse())
 
 # Keep window open
 window.mainloop()
-
 
 # # Command line code:
 # # Prompt User for String to convert
@@ -126,6 +183,3 @@ window.mainloop()
 
 # # Print Morse Code
 # print(f"{string_to_morse} in morse code is {morse}")
-
-
-
