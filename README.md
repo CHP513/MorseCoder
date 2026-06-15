@@ -1,94 +1,143 @@
 # Morse Coder
 
-This Python project provides a simple GUI tool that converts text into **Morse code** and plays the corresponding **dot and dash sounds**. It uses `tkinter` for the interface and `playsound` for audio playback.  
+**Author:** Charles (Chip) Brady
+**Date:** June 2026
 
-It can also be run from the **command line** to translate text without the GUI.
+## Overview
 
----
+Morse Coder is a Python application built with Tkinter and Pygame that converts text into Morse code and plays the corresponding Morse code audio. Users can enter text, instantly view the Morse code translation, and hear the dots and dashes played through sound effects.
 
-## ✨ Features
-- Convert any input text (A–Z, 0–9, space) into Morse code.
-- Displays the translated Morse code in real-time.
-- Plays the Morse code as audio (`.wav` sounds for dots and dashes).
-- Simple GUI built with **Tkinter**.
-- Optional command-line usage for quick translations.
+The project demonstrates the use of graphical user interfaces, dictionaries, event handling, file management, and audio playback in Python.
 
 ---
 
-## 📦 Requirements
-- Python 3.7+
-- Libraries:
-  - `tkinter` (bundled with Python)
-  - [`playsound`](https://pypi.org/project/playsound/)
+## Features
 
-Install dependencies with:
+* Convert letters, numbers, and selected punctuation into Morse code
+* Display Morse code translation in a graphical user interface
+* Play Morse code audio using separate dot and dash sound effects
+* Support for word separation using Morse code conventions
+* Clear button to reset the input and output fields
+* Press **Enter** to convert text without clicking the Convert button
+* Prevents overlapping audio playback
+* Uses relative file paths for portability
+
+---
+
+## Supported Characters
+
+### Letters
+
+A-Z
+
+### Numbers
+
+0-9
+
+### Punctuation
+
+* !
+* ?
+* .
+* ,
+* :
+
+### Space
+
+Spaces between words are represented by "/" in the Morse code output.
+
+---
+
+## Requirements
+
+* Python 3.x
+* Pygame
+
+Install Pygame with:
+
 ```bash
-pip install playsound
+pip install pygame
 ```
 
 ---
 
-## ▶️ GUI Usage
-1. Clone or download this repository.
-2. Update the paths to the `dot.wav` and `dash.wav` files inside **`main.py`**:
-   ```python
-   DOT_SOUND = "path/to/dot.wav"
-   DASH_SOUND = "path/to/dash.wav"
-   ```
-3. Run the program:
-   ```bash
-   python main.py
-   ```
-4. In the GUI:
-   - Enter text in the input box.
-   - Click **Convert**.
-   - See the Morse code displayed.
-   - Hear the Morse code played as sound.
+## Project Files
+
+```text
+MorseCoder/
+│
+├── morse_coder.py
+├── dot.wav
+├── dash.wav
+└── README.md
+```
+
+### File Descriptions
+
+* **morse_coder.py** – Main application source code
+* **dot.wav** – Audio file used for Morse code dots
+* **dash.wav** – Audio file used for Morse code dashes
+* **README.md** – Project documentation
 
 ---
 
-## 💻 Command-Line Usage
-The script also contains commented-out code for running in **command-line mode**.  
+## How to Run
 
-1. Uncomment this section in `main.py`:
-   ```python
-   # # Command line code:
-   # string_to_morse = input("Input String to translate into Morse: ")
-   # print(f"{string_to_morse} in morse code is {morse}")
-   ```
-2. Run the program from the terminal:
-   ```bash
-   python main.py
-   ```
-3. Enter text when prompted:
-   ```
-   Input String to translate into Morse: HELLO
-   ```
-4. Output:
-   ```
-   HELLO in morse code is .... . .-.. .-.. ---
-   ```
+1. Ensure Python is installed.
+2. Install Pygame:
+
+```bash
+pip install pygame
+```
+
+3. Place `dot.wav` and `dash.wav` in the same directory as the Python script.
+4. Run the program:
+
+```bash
+python morse_coder.py
+```
 
 ---
 
-## 🔈 Audio
-- Provide your own **dot.wav** and **dash.wav** sound files.
-- Place them anywhere on your system and update the file paths in `main.py`.
+## How to Use
+
+1. Launch the application.
+2. Type a message into the text box.
+3. Click **Convert** or press **Enter**.
+4. The Morse code translation will appear on the screen.
+5. The program will automatically play the Morse code audio.
+6. Click **Clear** to remove the current text and translation.
 
 ---
 
-## 📚 Example
-Input:
-```
-HELLO
-```
-Output:
-```
-.... . .-.. .-.. ---
-```
-Audio playback: dot and dash sounds for each symbol.
+## Concepts Demonstrated
+
+This project demonstrates:
+
+* Tkinter GUI development
+* Event-driven programming
+* Python dictionaries
+* Audio playback using Pygame
+* File path management with `os`
+* Input validation and error handling
+* Morse code encoding techniques
 
 ---
 
-## 📜 License
-This project is open-source and available under the MIT License.
+## Future Improvements
+
+Potential enhancements include:
+
+* Adjustable Morse code speed (Words Per Minute)
+* Additional punctuation support
+* Copy Morse code to clipboard
+* Save translations to a text file
+* Stop/Pause playback controls
+* Reverse conversion (Morse code to text)
+* Light and dark theme options
+
+---
+
+## License
+
+This project is intended for educational and personal learning purposes.
