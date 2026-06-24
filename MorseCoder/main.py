@@ -28,7 +28,7 @@ WORD_SPACE = 700
 if not os.path.exists(DOT_SOUND):
     raise FileNotFoundError(f"Missing file: {DOT_SOUND}")
 
-if not os.path.exists(DOT_SOUND):
+if not os.path.exists(DASH_SOUND):
     raise FileNotFoundError(f"Missing file: {DASH_SOUND}")
 
 # Prevent Multiple Playbacks with is_playing check
