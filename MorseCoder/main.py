@@ -28,7 +28,7 @@ WORD_SPACE = 700
 if not os.path.exists(DOT_SOUND):
     raise FileNotFoundError(f"Missing file: {DOT_SOUND}")
 
-if not os.path.exists(DASH_SOUND):
+if not os.path.exists(DOT_SOUND):
     raise FileNotFoundError(f"Missing file: {DASH_SOUND}")
 
 # Prevent Multiple Playbacks with is_playing check
@@ -80,8 +80,9 @@ MORSE_CODE = {
     " ": " "
 }
 
-# Converts string in inputtxt to morse code and outputs into morse label
+
 def convert_to_morse():
+    """Converts string in inputtxt to morse code and outputs into morse label"""
     # Get String from input box and upper case string
     text = inputtxt.get().upper()
 
@@ -101,9 +102,9 @@ def convert_to_morse():
     if morse:
         window.after(100, play_morse)
 
-# Plays sound of morse code in morse label
-def play_morse():
 
+def play_morse():
+    """Plays sound of morse code in morse label"""
     # Do not play if sound is already playing
     global is_playing
 
